@@ -1,5 +1,5 @@
 
-class LeanPokerHerokuDeployer::HerokuGateway
+class LeanPokerHermes::HerokuGateway
   def initialize
     @platform_api = PlatformAPI.connect_oauth(ENV['HEROKU_API_KEY'])
   end

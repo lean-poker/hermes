@@ -1,5 +1,5 @@
 $:.push(File.join(File.dirname(__FILE__)))
 
-module LeanPokerHerokuDeployer
-  autoload :HerokuGateway, 'lean_poker_heroku_deployer/heroku_gateway'
+module LeanPokerHermes
+  autoload :HerokuGateway, 'lean_poker_hermes/heroku_gateway'
 end
