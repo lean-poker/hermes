@@ -1,5 +1,7 @@
 require 'sinatra'
 require 'json'
+require_relative 'bootstrap'
+require_relative 'lib/lean_poker_hermes'
 
 get '/' do
   redirect 'http://leanpoker.org'
@@ -9,16 +11,8 @@ get '/check' do
   JSON.generate :success => true
 end
 
-get '/deployment' do
-
-end
-
-get '/deployment/:id' do
-
-end
-
 post '/deployment' do
-
+  LeanPokerHermes::Workers::Create.perform_async(params[:callback_url])
 end
 
 patch '/deployment/:id' do

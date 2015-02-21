@@ -4,9 +4,8 @@ class LeanPokerHermes::HerokuGateway
     @platform_api = PlatformAPI.connect_oauth(ENV['HEROKU_API_KEY'])
   end
 
-  def create(name = nil)
-    options = name.nil? ? {} : {'name' => name}
-    @platform_api.app.create(options)
+  def create
+    @platform_api.app.create({})
   end
 
   def delete(name)
