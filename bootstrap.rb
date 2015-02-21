@@ -3,11 +3,8 @@ require 'platform-api'
 require 'sidekiq'
 require_relative 'lib/lean_poker_hermes'
 require_relative 'lib/http_request_light'
-require_relative 'lib/document_store'
 
 Dotenv.load
-
-# DocumentStore.connect ENV['MONGO_URL']
 
 Sidekiq.configure_client do |config|
   config.redis = {
