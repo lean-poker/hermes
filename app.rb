@@ -18,12 +18,15 @@ end
 
 post '/deployment' do
   LeanPokerHermes::Workers::Create.perform_async(params[:callback_url])
+  JSON.generate :success => true
 end
 
 patch '/deployment/:id' do
   LeanPokerHermes::Workers::Deploy.perform_async(params[:id], params[:owner], params[:repository], params[:commit], params[:callback_url])
+  JSON.generate :success => true
 end
 
 delete '/deployment/:id' do
-
+  LeanPokerHermes::Workers::Delete.perform_async(params[:id])
+  JSON.generate :success => true
 end
