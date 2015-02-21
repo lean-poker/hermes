@@ -8,7 +8,8 @@ class LeanPokerHermes::Workers::Create
 
     app_info = {
         :id => app['id'],
-        :name => app['name']
+        :name => app['name'],
+        :url => "http://#{app['name']}.herokuapp.com/"
     }
 
     HttpRequestLight.post(callback_url, app_info, 120) do |error, _|

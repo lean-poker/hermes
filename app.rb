@@ -21,7 +21,7 @@ post '/deployment' do
 end
 
 patch '/deployment/:id' do
-
+  LeanPokerHermes::Workers::Deploy.perform_async(params[:id], params[:owner], params[:repository], params[:commit], params[:callback_url])
 end
 
 delete '/deployment/:id' do
