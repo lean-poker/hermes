@@ -10,7 +10,7 @@ class LeanPokerHermes::Workers::Deploy
       info = LeanPokerHermes::HerokuGateway.instance.deployment_result(id,deploy['id'])
     end while info['build']['status'] == 'pending'
 
-    success = (info['build']['status'] == 'succeeded')
+    success = (info['build']['status'] == 'succeeded') ? '1' : '0'
     logs = info['lines'].map { |line| line['line'] }.join('')
 
     info = {
