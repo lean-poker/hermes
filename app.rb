@@ -26,6 +26,11 @@ patch '/deployment/:id' do
   JSON.generate :success => true
 end
 
+post '/deployment/:id/log_drain' do
+  LeanPokerHermes::HerokuGateway.instance.add_log_drain(params[:id], params[:url])
+  JSON.generate :success => true
+end
+
 delete '/deployment/:id' do
   LeanPokerHermes::Workers::Delete.perform_async(params[:id])
   JSON.generate :success => true

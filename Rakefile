@@ -6,6 +6,10 @@ task :create do
   p "Name: #{app['name']}, Id: #{app['id']}"
 end
 
+task :add_log_drain, :name, :url do |_, args|
+  LeanPokerHermes::HerokuGateway.instance.add_log_drain(args.name, args.url)
+end
+
 task :delete, :name do |_, args|
   LeanPokerHermes::HerokuGateway.instance.delete(args.name)
 end
