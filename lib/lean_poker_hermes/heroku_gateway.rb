@@ -9,6 +9,7 @@ class LeanPokerHermes::HerokuGateway
   end
 
   def add_log_drain(name, url)
+    p "Adding logdrain #{url} to #{name}"
     @platform_api.log_drain.create(name, { "url" => url })
   end
 
