@@ -10,7 +10,13 @@ class LeanPokerHermes::HerokuGateway
 
   def add_log_drain(name, url)
     p "Adding logdrain #{url} to #{name}"
-    @platform_api.log_drain.create(name, { "url" => url })
+    drain = @platform_api.log_drain.create(name, { "url" => url })
+    drain['id']
+  end
+
+  def delete_log_drain(name, drain_id)
+    p "Deleting logdrain #{drain_id} from #{name}"
+    @platform_api.log_drain.delete(name, drain_id)
   end
 
   def delete(name)
