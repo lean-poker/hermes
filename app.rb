@@ -29,7 +29,7 @@ patch '/deployment/:id' do
       owner: params[:owner],
       repository: params[:repository],
       commit: params[:commit],
-      params: params[:callback_url]
+      callback_url: params[:callback_url]
   }
 
   DocumentStore['deploys'].update(search_for, {'$set' => deployment_data}, upsert: true)
