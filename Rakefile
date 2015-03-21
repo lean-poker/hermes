@@ -35,6 +35,8 @@ end
 
 task :perform_deployments do
   DocumentStore['deploys'].find({}).each do |deploy|
+    p deploy
+    p deploy['id'], deploy['owner'], deploy['repository'], deploy['commit'], deploy['callback_url']
     LeanPokerHermes::Workers::Deploy.perform_async(deploy['id'], deploy['owner'], deploy['repository'], deploy['commit'], deploy['callback_url'])
 
     DocumentStore['deploys'].remove(deploy)
