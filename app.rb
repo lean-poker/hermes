@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 require_relative 'bootstrap'
 require_relative 'lib/lean_poker_hermes'
+require_relative 'lib/document_store'
 
 get '/' do
   redirect 'http://leanpoker.org'
@@ -22,7 +23,16 @@ post '/deployment' do
 end
 
 patch '/deployment/:id' do
-  LeanPokerHermes::Workers::Deploy.perform_async(params[:id], params[:owner], params[:repository], params[:commit], params[:callback_url])
+  search_for = {id: params[:id], owner: params[:owner], repository: params[:repository]}
+  deployment_data = {
+      id: params[:id],
+      owner: params[:owner],
+      repository: params[:repository],
+      commit: params[:commit],
+      params: params[:callback_url]
+  }
+
+  DocumentStore['deploys'].update(search_for, {'$set' => deployment_data}, upsert: true)
   JSON.generate :success => true
 end
 
@@ -40,3 +50,5 @@ delete '/deployment/:id' do
   LeanPokerHermes::Workers::Delete.perform_async(params[:id])
   JSON.generate :success => true
 end
+
+

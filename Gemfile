@@ -8,3 +8,5 @@ gem 'platform-api'
 gem 'rake'
 gem 'sidekiq'
 gem 'sinatra'
+gem 'mongo'
+

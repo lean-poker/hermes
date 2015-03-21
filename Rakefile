@@ -32,3 +32,9 @@ task :deploy, :name, :owner, :repository, :commit do |_, args|
     line['line']
   end
 end
+
+task :perform_deployments do
+  DocumentStore['deploys'].find.each do |deploy|
+    LeanPokerHermes::Workers::Deploy.perform_async(deploy[:id], deploy[:owner], deploy[:repository], deploy[:commit], deploy[:callback_url])
+  end
+end
