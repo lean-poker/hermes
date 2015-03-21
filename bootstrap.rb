@@ -7,7 +7,7 @@ require_relative 'lib/document_store'
 
 Dotenv.load
 
-DocumentStore.connect ENV['MONGOLAB_API']
+DocumentStore.connect ENV['MONGOLAB_URI']
 
 Sidekiq.configure_client do |config|
   config.redis = {
