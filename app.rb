@@ -27,6 +27,7 @@ patch '/deployment/:id' do
 end
 
 post '/deployment/:id/log_drain' do
+  puts "Adding log drain for #{params[:id]} with url #{params[:url]}"
   id = LeanPokerHermes::HerokuGateway.instance.add_log_drain(params[:id], params[:url])
   JSON.generate({:success => true, :id => id})
 end
