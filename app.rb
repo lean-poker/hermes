@@ -41,3 +41,11 @@ delete '/deployment/:id' do
   LeanPokerHermes::Workers::Delete.perform_async(params[:id])
   JSON.generate :success => true
 end
+
+get '/deployment/:id/config_var' do
+  JSON.generate LeanPokerHermes::HerokuGateway.instance.get_config_vars(params[:id])
+end
+
+patch '/deployment/:id/config_var' do
+  JSON.generate LeanPokerHermes::HerokuGateway.instance.set_config_vars(params[:id], JSON.parse(params[:config_vars]))
+end
