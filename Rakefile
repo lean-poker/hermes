@@ -6,6 +6,13 @@ task :create do
   p "Name: #{app['name']}, Id: #{app['id']}"
 end
 
+task :list do
+  LeanPokerHermes::HerokuGateway.instance.list.each do |app|
+    puts app['name']
+  end
+
+end
+
 task :delete, :name do |_, args|
   LeanPokerHermes::HerokuGateway.instance.delete(args.name)
 end

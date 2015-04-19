@@ -17,7 +17,7 @@ post '/check' do
 end
 
 post '/deployment' do
-  LeanPokerHermes::Workers::Create.perform_async(params[:callback_url])
+  LeanPokerHermes::Workers::Create.perform_async(params[:callback_url],params[:payload])
   JSON.generate :success => true
 end
 
