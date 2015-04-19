@@ -3,24 +3,16 @@ require 'sidekiq'
 class LeanPokerHermes::Workers::Create
   include Sidekiq::Worker
 
-  def perform(callback_url, payload = nil)
+  def perform(callback_url, buildpack = nil)
     app = LeanPokerHermes::HerokuGateway.instance.create
 
-    unless payload.nil?
-      begin
-        params = JSON.parse(payload)
-      rescue Exception => e
-        puts "Could not parse payload: #{payload}"
+    begin
+      unless buildpack.nil?
+        LeanPokerHermes::HerokuGateway.instance.set_buildpack(app['id'], buildpack)
       end
-
-      begin
-        unless params['buildpack'].nil?
-          LeanPokerHermes::HerokuGateway.instance.set_buildpack(app['id'], params['buildpack'])
-        end
-      rescue Exception => e
-        puts "Could not set buildpack url!"
-        puts e.message
-      end
+    rescue Exception => e
+      puts "Could not set buildpack url!"
+      puts e.message
     end
 
     app_info = {
