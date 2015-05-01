@@ -21,6 +21,12 @@ class LeanPokerHermes::Workers::Create
         :url => "http://#{app['name']}.herokuapp.com/"
     }
 
+    puts "Trying to set the following Heroku environment variables..."
+    puts app_info[:name]
+    puts app_info[:url]
+
+    LeanPokerHermes::HerokuGateway.instance.set_config_vars(app_info[:name], {'HOST' => app_info[:url], 'PORT' => '8080'})
+
     puts "Sending response to #{callback_url}"
     HttpRequestLight.post(callback_url, app_info, 120) do |error, _|
       if error
