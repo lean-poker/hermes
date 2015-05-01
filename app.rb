@@ -17,7 +17,7 @@ post '/check' do
 end
 
 post '/deployment' do
-  env_vars = nils
+  env_vars = nil
   env_vars = JSON.parse(params[:environment_variables]) unless params[:environment_variables].nil?
   LeanPokerHermes::Workers::Create.perform_async(params[:callback_url],params[:buildpack], env_vars)
   JSON.generate :success => true
