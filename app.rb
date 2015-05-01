@@ -17,7 +17,8 @@ post '/check' do
 end
 
 post '/deployment' do
-  LeanPokerHermes::Workers::Create.perform_async(params[:callback_url],params[:buildpack])
+  env_vars = JSON.parse(params[:environment_variables])
+  LeanPokerHermes::Workers::Create.perform_async(params[:callback_url],params[:buildpack], env_vars)
   JSON.generate :success => true
 end
 
@@ -27,7 +28,7 @@ patch '/deployment/:id' do
 end
 
 post '/deployment/:id/log_drain' do
-  puts "Adding log drain for #{params[:id]} with url #{params[:url]}"
+  p "Adding log drain for #{params[:id]} with url #{params[:url]}"
   id = LeanPokerHermes::HerokuGateway.instance.add_log_drain(params[:id], params[:url])
   JSON.generate({:success => true, :id => id})
 end

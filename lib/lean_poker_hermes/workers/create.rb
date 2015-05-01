@@ -3,7 +3,7 @@ require 'sidekiq'
 class LeanPokerHermes::Workers::Create
   include Sidekiq::Worker
 
-  def perform(callback_url, buildpack = nil)
+  def perform(callback_url, buildpack = nil, environment_variables = nil)
     app = LeanPokerHermes::HerokuGateway.instance.create
 
     begin
@@ -11,8 +11,8 @@ class LeanPokerHermes::Workers::Create
         LeanPokerHermes::HerokuGateway.instance.set_buildpack(app['id'], buildpack)
       end
     rescue Exception => e
-      puts "Could not set buildpack url!"
-      puts e.message
+      p "Could not set buildpack url!"
+      p e.message
     end
 
     app_info = {
@@ -21,13 +21,12 @@ class LeanPokerHermes::Workers::Create
         :url => "http://#{app['name']}.herokuapp.com/"
     }
 
-    puts "Trying to set the following Heroku environment variables..."
-    puts app_info[:name]
-    puts app_info[:url]
+    p "Trying to set Heroku environment variables..."
 
-    LeanPokerHermes::HerokuGateway.instance.set_config_vars(app_info[:name], {'HOST' => app_info[:url], 'PORT' => '8080'})
+    env_vars = { 'HOST' => app_info[:url] }.merge(environment_variables||{})
+    LeanPokerHermes::HerokuGateway.instance.set_config_vars(app_info[:name], env_vars)
 
-    puts "Sending response to #{callback_url}"
+    p "Sending response to #{callback_url}"
     HttpRequestLight.post(callback_url, app_info, 120) do |error, _|
       if error
         raise Exception.new("Failed to respond through callback url")

@@ -8,7 +8,7 @@ end
 
 task :list do
   LeanPokerHermes::HerokuGateway.instance.list.each do |app|
-    puts app['name']
+    p app['name']
   end
 
 end
