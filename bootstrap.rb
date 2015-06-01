@@ -15,7 +15,7 @@ Sidekiq.configure_client do |config|
       :namespace => 'LeanPokerHermes'
   }
 
-  unless ENV['  HEROKU_API_KEY'].empty?
+  unless ENV['HEROKU_API_KEY'].nil?
     config.client_middleware do |chain|
       chain.add Autoscaler::Sidekiq::Client, 'default' => Autoscaler::HerokuScaler.new
     end
@@ -28,7 +28,7 @@ Sidekiq.configure_server do |config|
       :namespace => 'LeanPokerHermes'
   }
 
-  unless ENV['HEROKU_API_KEY'].empty?
+  unless ENV['HEROKU_API_KEY'].nil?
     config.server_middleware do |chain|
       chain.add(Autoscaler::Sidekiq::Server, Autoscaler::HerokuScaler.new, 240) # 240 second timeout
     end
