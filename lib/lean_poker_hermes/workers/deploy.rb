@@ -3,11 +3,11 @@ require 'sidekiq'
 class LeanPokerHermes::Workers::Deploy
   include Sidekiq::Worker
 
-  def perform(id, owner, repository, commit, callback_url)
-    deploy = LeanPokerHermes::HerokuGateway.instance.deploy(id, owner, repository, commit)
+  def perform(id, owner, repository, commit, callback_url, target_heroku_api_key)
+    deploy = LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).deploy(id, owner, repository, commit)
 
     begin
-      info = LeanPokerHermes::HerokuGateway.instance.deployment_result(id,deploy['id'])
+      info = LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).deployment_result(id,deploy['id'])
       sleep 60
     end while info['build']['status'] == 'pending'
 

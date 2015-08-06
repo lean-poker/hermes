@@ -1,7 +1,7 @@
 
 class LeanPokerHermes::HerokuGateway
-  def initialize
-    @platform_api = PlatformAPI.connect_oauth(ENV['TARGET_HEROKU_API_KEY'])
+  def initialize(target_heroku_api_key)
+    @platform_api = PlatformAPI.connect_oauth(target_heroku_api_key)
   end
 
   def create
@@ -57,7 +57,13 @@ class LeanPokerHermes::HerokuGateway
     @platform_api.config_var.update(name, config_vars)
   end
 
-  def self.instance
-    @instance ||= new
+  def self.instance(target_heroku_api_key = nil)
+    api_key = target_heroku_api_key || ENV['TARGET_HEROKU_API_KEY']
+
+    if @instance.nil?
+      @instance = {}
+    end
+
+    @instance[api_key] ||= new(api_key)
   end
 end
