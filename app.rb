@@ -5,7 +5,17 @@ require_relative 'lib/lean_poker_hermes'
 
 helpers do
   def authenticate(token, target_heroku_api_key)
-    halt 401 if token != ENV['TOKEN'] && target_heroku_api_key.nil?
+    if token != ENV['TOKEN'] && target_heroku_api_key.nil?
+      if !token.nil?
+        puts "Authentication failed with token"
+      elsif !target_heroku_api_key.nil?
+        puts "Authentication failed with heroku key"
+      else
+        puts "No credentials were provided"
+      end
+
+      halt 401
+    end
   end
 end
 
