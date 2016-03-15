@@ -46,6 +46,11 @@ patch '/deployment/:id' do
   JSON.generate :success => true
 end
 
+get '/deployment' do
+  authenticate(params[:token], params[:target_heroku_api_key])
+  JSON.generate LeanPokerHermes::HerokuGateway.instance.list
+end
+
 post '/deployment/:id/log_drain' do
   authenticate(params[:token], params[:target_heroku_api_key])
   puts "Adding log drain for #{params[:id]} with url #{params[:url]}"

@@ -10,7 +10,6 @@ task :list do
   LeanPokerHermes::HerokuGateway.instance.list.each do |app|
     puts app['name']
   end
-
 end
 
 task :delete, :name do |_, args|
