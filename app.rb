@@ -42,7 +42,7 @@ end
 
 patch '/deployment/:id' do
   authenticate(params[:token], params[:target_heroku_api_key])
-  LeanPokerHermes::Workers::Deploy.perform_async(params[:id], params[:owner], params[:repository], params[:commit], params[:callback_url], params[:target_heroku_api_key])
+  LeanPokerHermes::Workers::Deploy.perform_async(params[:id], params[:owner], params[:repository], params[:archive_url], params[:commit], params[:callback_url], params[:target_heroku_api_key])
   JSON.generate :success => true
 end
 

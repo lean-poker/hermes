@@ -20,10 +20,10 @@ class LeanPokerHermes::HerokuGateway
     @platform_api.app.delete(name)
   end
 
-  def deploy(name, owner, repository, commit)
+  def deploy(name, archive_url, commit)
     options = {
         "source_blob" => {
-            "url" => "https://github.com/#{owner}/#{repository}/archive/#{commit}.tar.gz",
+            "url" => archive_url,
             "version" => commit
         }
     }

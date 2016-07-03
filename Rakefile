@@ -16,8 +16,8 @@ task :delete, :name do |_, args|
   LeanPokerHermes::HerokuGateway.instance.delete(args.name)
 end
 
-task :deploy, :name, :owner, :repository, :commit do |_, args|
-  deploy = LeanPokerHermes::HerokuGateway.instance.deploy(args.name, args.owner, args.repository, args.commit)
+task :deploy, :name, :archive_url, :commit do |_, args|
+  deploy = LeanPokerHermes::HerokuGateway.instance.deploy(args.name, args.archive_url, args.commit)
 
   begin
     print '.'
