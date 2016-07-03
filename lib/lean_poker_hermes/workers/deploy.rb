@@ -8,7 +8,7 @@ class LeanPokerHermes::Workers::Deploy
 
     begin
       info = LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).deployment_result(id,deploy['id'])
-      sleep 60
+      sleep 30
     end while info['build']['status'] == 'pending'
 
     success = (info['build']['status'] == 'succeeded') ? '1' : '0'
