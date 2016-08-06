@@ -3,7 +3,7 @@ class HttpRequestLight
 
   def initialize(url)
     uri = URI(url)
-    @host, @port, @path = uri.host, uri.port, uri.path
+    @host, @port, @path, @query = uri.host, uri.port, uri.path, uri.query
   end
 
   def do_request(method, message = nil, timeout = 10, &block)
@@ -44,7 +44,7 @@ class HttpRequestLight
       req.set_form(message)
       req
     elsif method == :get
-      Net::HTTP::Get.new(@path)
+      Net::HTTP::Get.new(@path + '?' + @query)
     elsif method == :delete
       Net::HTTP::Delete.new(@path)
     end
