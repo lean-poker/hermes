@@ -27,10 +27,7 @@ class LeanPokerHermes::Workers::Create
     LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).set_config_vars(app_info[:name], env_vars)
 
     p "Sending response to #{callback_url}"
-    HttpRequestLight.post(callback_url, app_info, 120) do |error, _|
-      if error
-        raise Exception.new("Failed to respond through callback url")
-      end
-    end
+    result = Faraday.post(callback_url, app_info)
+    raise Exception.new("Failed to respond through callback url") unless result.success?
   end
 end

@@ -23,10 +23,7 @@ class LeanPokerHermes::Workers::Deploy
         :logs => logs
     }
 
-    HttpRequestLight.post(callback_url, info, 30) do |error, _|
-      if error
-        raise Exception.new("Failed to respond through callback url")
-      end
-    end
+    result = Faraday.post(callback_url, info)
+    raise Exception.new("Failed to respond through callback url") unless result.success?
   end
 end
