@@ -24,6 +24,6 @@ class LeanPokerHermes::Workers::Deploy
         :logs => logs
     }
 
-    LeanPokerHermes::Workers::RespondToCalback.perform_async(callback_url, info)
+    LeanPokerHermes::Workers::RespondToCallback.perform_async(callback_url, info)
   end
 end
