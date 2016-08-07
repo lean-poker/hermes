@@ -24,7 +24,6 @@ class LeanPokerHermes::Workers::Deploy
         :logs => logs
     }
 
-    result = Faraday.post(callback_url, info)
-    raise Exception.new("Failed to respond through callback url") unless result.success?
+    LeanPokerHermes::Workers::RespondToCalback.perform_async(callback_url, info)
   end
 end
