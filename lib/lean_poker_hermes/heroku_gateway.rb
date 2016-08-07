@@ -12,10 +12,6 @@ class LeanPokerHermes::HerokuGateway
     @platform_api.app.list
   end
 
-  def set_buildpack(app_name, buildpack)
-    self.set_config_vars app_name, { "BUILDPACK_URL" => buildpack }
-  end
-
   def delete(name)
     @platform_api.app.delete(name)
   end
