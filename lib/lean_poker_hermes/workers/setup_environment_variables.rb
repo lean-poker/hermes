@@ -5,7 +5,7 @@ class LeanPokerHermes::Workers::SetupEnvironmentVariables
 
   def perform(callback_url, app_info, environment_variables, target_heroku_api_key)
     p "Trying to set Heroku environment variables..."
-    LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).set_config_vars(app_info[:name], environment_variables)
+    LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).set_config_vars(app_info[:id], environment_variables)
 
     LeanPokerHermes::Workers::RespondToCalback.perform_async(callback_url, app_info)
   end
