@@ -1,4 +1,5 @@
 require 'sidekiq'
+require 'faraday'
 
 class LeanPokerHermes::Workers::Create
   include Sidekiq::Worker
