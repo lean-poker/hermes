@@ -1,7 +1,7 @@
 require 'sidekiq'
 require 'faraday'
 
-class LeanPokerHermes::Workers::SetupEnvironmentVariables
+class LeanPokerHermes::Workers::RespondToCallback
   include Sidekiq::Worker
 
   def perform(callback_url, data)
