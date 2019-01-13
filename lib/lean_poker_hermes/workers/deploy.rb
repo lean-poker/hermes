@@ -9,11 +9,11 @@ class LeanPokerHermes::Workers::Deploy
 
     begin
       sleep 15
-      info = LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).deployment_result(id,deploy['id'])
+      info = LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).deployment_info(id,deploy['id'])
     end while info['status'] == 'pending'
 
     success = (info['status'] == 'succeeded') ? '1' : '0'
-    
+
     logs = Faraday.get(deploy['output_stream_url']).body
 
     info = {
