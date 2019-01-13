@@ -1,4 +1,5 @@
 require_relative 'bootstrap'
+require 'faraday'
 
 
 task :create do
@@ -19,16 +20,26 @@ end
 task :deploy, :name, :archive_url, :commit do |_, args|
   deploy = LeanPokerHermes::HerokuGateway.instance.deploy(args.name, args.archive_url, args.commit)
 
+  log_url = deploy['output_stream_url']
+
+  puts log_url
+
   begin
+    sleep 2
     print '.'
     STDOUT.flush
-    info = LeanPokerHermes::HerokuGateway.instance.deployment_result(args.name,deploy['id'])
-    sleep 1
-  end while info["build"]["status"] == 'pending'
+    info = LeanPokerHermes::HerokuGateway.instance.deployment_info(args.name,deploy['id'])
 
-  info['lines'].map do |line|
-    line['line']
-  end
+  end while info["status"] == 'pending'
+
+  puts JSON.generate info["status"]
+  puts ' --- '
+
+  log_lines = Faraday.get(log_url).body
+
+  print log_lines
+
+  puts ' --- '
 end
 
 task :add_log_drain, :name, :url do |_, args|
