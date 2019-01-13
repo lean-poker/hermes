@@ -25,6 +25,8 @@ GEM
       rack
     rake (12.3.2)
     redis (4.1.0)
+    redis-namespace (1.6.0)
+      redis (>= 3.0.4)
     sidekiq (5.2.5)
       connection_pool (~> 2.2, >= 2.2.2)
       rack (>= 1.5.0)
@@ -46,6 +48,7 @@ DEPENDENCIES
   json
   platform-api
   rake
+  redis-namespace
   sidekiq
   sinatra
 
