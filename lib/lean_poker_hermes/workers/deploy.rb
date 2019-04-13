@@ -16,6 +16,14 @@ class LeanPokerHermes::Workers::Deploy
 
     logs = Faraday.get(deploy['output_stream_url']).body
 
+    p callback_url 
+    p id
+    p owner
+    p repository
+    p commit
+    p success
+    p logs 
+
     info = {
        :id => id,
        :owner => owner,
