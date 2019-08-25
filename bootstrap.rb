@@ -7,14 +7,14 @@ Dotenv.load
 
 Sidekiq.configure_client do |config|
   config.redis = {
-      :url => ENV['REDIS_URL'],
+      :url => ENV['REDISCLOUD_URL'],
       :namespace => 'LeanPokerHermes'
   }
 end
 
 Sidekiq.configure_server do |config|
   config.redis = {
-      :url => ENV['REDIS_URL'],
+      :url => ENV['REDISCLOUD_URL'],
       :namespace => 'LeanPokerHermes'
   }
 end
