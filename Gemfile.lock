@@ -20,7 +20,7 @@ GEM
     platform-api (2.2.0)
       heroics (~> 0.0.25)
       moneta (~> 1.0.0)
-    rack (2.0.6)
+    rack (2.0.8)
     rack-protection (2.0.5)
       rack
     rake (12.3.2)
