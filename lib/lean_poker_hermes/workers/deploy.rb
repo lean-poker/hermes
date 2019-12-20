@@ -14,7 +14,7 @@ class LeanPokerHermes::Workers::Deploy
 
     success = (info['status'] == 'succeeded') ? '1' : '0'
 
-    logs = Faraday.get(deploy['output_stream_url']).body
+    logs = Faraday.get(deploy['output_stream_url']).body.force_encoding('ISO-8859-1')
 
     p callback_url 
     p id
