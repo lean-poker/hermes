@@ -45,11 +45,11 @@ GEM
       rack
     rake (13.0.6)
     rate_throttle_client (0.1.2)
-    redis (4.4.0)
+    redis (4.5.1)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
     ruby2_keywords (0.0.5)
-    sidekiq (6.2.2)
+    sidekiq (6.4.0)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
