@@ -4,6 +4,7 @@ class LeanPokerHermes::Workers::Create
   include Sidekiq::Worker
 
   def perform(callback_url, buildpack = nil, environment_variables = nil, target_heroku_api_key = nil)
+    p target_heroku_api_key
     app = LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).create
 
     app_info = {
