@@ -1,7 +1,7 @@
-require 'sidekiq'
+require "sidekiq"
 
 class LeanPokerHermes::Workers::Delete
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   def perform(id, target_heroku_api_key)
     LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).delete(id)
