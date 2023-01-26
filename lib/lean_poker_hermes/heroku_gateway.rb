@@ -1,11 +1,10 @@
-
 class LeanPokerHermes::HerokuGateway
   def initialize(target_heroku_api_key)
     @platform_api = PlatformAPI.connect_oauth(target_heroku_api_key)
   end
 
   def create
-    @platform_api.app.create({})
+    @platform_api.app.create({region: "eu"})
   end
 
   def list
@@ -18,10 +17,10 @@ class LeanPokerHermes::HerokuGateway
 
   def deploy(name, archive_url, commit)
     options = {
-        "source_blob" => {
-            "url" => archive_url,
-            "version" => commit
-        }
+      "source_blob" => {
+        "url" => archive_url,
+        "version" => commit
+      }
     }
     @platform_api.build.create(name, options)
   end
@@ -36,8 +35,8 @@ class LeanPokerHermes::HerokuGateway
 
   def add_log_drain(name, url)
     p "Adding logdrain #{url} to #{name}"
-    drain = @platform_api.log_drain.create(name, { "url" => url })
-    drain['id']
+    drain = @platform_api.log_drain.create(name, {"url" => url})
+    drain["id"]
   end
 
   def delete_log_drain(name, drain_id)
@@ -54,7 +53,7 @@ class LeanPokerHermes::HerokuGateway
   end
 
   def self.instance(target_heroku_api_key = nil)
-    api_key = target_heroku_api_key || ENV['TARGET_HEROKU_API_KEY']
+    api_key = target_heroku_api_key || ENV["TARGET_HEROKU_API_KEY"]
 
     if @instance.nil?
       @instance = {}
