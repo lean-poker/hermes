@@ -1,12 +1,14 @@
-require 'sidekiq'
-require 'faraday'
+require "httparty"
+require "sidekiq"
 
 class LeanPokerHermes::Workers::RespondToCallback
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   def perform(callback_url, data)
     p "Sending response to #{callback_url}"
-    result = Faraday.post(callback_url, data)
-    raise Exception.new("Failed to respond through callback url") unless result.success?
+
+    response = HTTParty.post callback_url, body: data, format: :plain
+    json = JSON.parse response.body, symbolize_names: true
+    raise StandardError.new("Failed to respond through callback url") unless json[:success]
   end
 end
