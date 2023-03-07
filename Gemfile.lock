@@ -70,6 +70,11 @@ GEM
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
+    sentry-ruby (5.8.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+    sentry-sidekiq (5.8.0)
+      sentry-ruby (~> 5.8.0)
+      sidekiq (>= 3.0)
     sidekiq (7.0.6)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -99,6 +104,8 @@ DEPENDENCIES
   json
   platform-api
   rake
+  sentry-ruby (~> 5.8)
+  sentry-sidekiq (~> 5.8)
   sidekiq
   sinatra
   standard (~> 1.22)
