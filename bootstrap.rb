@@ -20,3 +20,7 @@ Sidekiq.configure_server do |config|
     url: ENV["REDISCLOUD_URL"]
   }
 end
+
+# Disable Strict Args checking
+# https://github.com/sidekiq/sidekiq/wiki/Best-Practices
+Sidekiq.strict_args!(false)
