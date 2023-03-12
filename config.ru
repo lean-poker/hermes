@@ -1,11 +1,6 @@
-require "sentry-ruby"
 require "sidekiq/web"
 require "securerandom"
 require_relative "app"
-
-Sentry.init do |config|
-  config.dsn = ENV["SENTRY_DSN"]
-end
 
 File.open(".session.key", "w") {|f| f.write(SecureRandom.hex(32)) }
 
