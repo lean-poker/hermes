@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'honeybadger'
 require 'json'
 require_relative 'bootstrap'
 require_relative 'lib/lean_poker_hermes'
