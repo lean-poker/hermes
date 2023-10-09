@@ -10,7 +10,7 @@ class LeanPokerHermes::Workers::Create
     app_info = {
       "id" => app["id"],
       "name" => app["name"],
-      "url" => "http://#{app["name"]}.herokuapp.com/"
+      "url" => app["web_url"]
     }
 
     environment_variables = build_environment_variables(app_info, buildpack, environment_variables)
