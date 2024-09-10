@@ -4,7 +4,7 @@ class LeanPokerHermes::HerokuGateway
   end
 
   def create
-    @platform_api.app.create({region: "eu"})
+    @platform_api.app.create({region: "us"})
   end
 
   def list
