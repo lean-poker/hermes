@@ -21,7 +21,7 @@ helpers do
 end
 
 get '/' do
-  redirect 'http://leanpoker.org'
+  redirect 'https://leanpoker.org'
 end
 
 get '/check' do
