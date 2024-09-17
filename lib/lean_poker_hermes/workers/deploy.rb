@@ -5,7 +5,7 @@ require_relative "../../hash_ext"
 class LeanPokerHermes::Workers::Deploy
   include Sidekiq::Job
 
-  def perform(id, owner, repository, archive_url, commit, callback_url, target_heroku_api_key, deploy_id = nil)
+  def perform(id, owner, repository, archive_url, commit, message, callback_url, target_heroku_api_key, deploy_id = nil)
     deploy = if deploy_id.nil?
       LeanPokerHermes::HerokuGateway.instance(target_heroku_api_key).deploy(id, archive_url, commit)
     else
@@ -14,7 +14,7 @@ class LeanPokerHermes::Workers::Deploy
 
     if deploy["status"] == "pending"
       # Reschedule job in 15 seconds
-      LeanPokerHermes::Workers::Deploy.perform_at(Time.now + 15, id, owner, repository, archive_url, commit, callback_url, target_heroku_api_key, deploy["id"])
+      LeanPokerHermes::Workers::Deploy.perform_at(Time.now + 15, id, owner, repository, archive_url, commit, message, callback_url, target_heroku_api_key, deploy["id"])
     else
       success = (deploy["status"] == "succeeded") ? "1" : "0"
 
@@ -25,6 +25,7 @@ class LeanPokerHermes::Workers::Deploy
       p owner
       p repository
       p commit
+      p message
       p success
       p logs
 
@@ -33,6 +34,7 @@ class LeanPokerHermes::Workers::Deploy
         "owner" => owner,
         "repository" => repository,
         "commit" => commit,
+        "message" => message,
         "success" => success,
         "logs" => logs
       }
@@ -45,6 +47,7 @@ class LeanPokerHermes::Workers::Deploy
       "owner" => owner,
       "repository" => repository,
       "commit" => commit,
+      "message" => message,
       "success" => "0",
       "logs" => logs
     }
