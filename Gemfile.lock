@@ -3,7 +3,9 @@ GEM
   specs:
     ast (2.4.2)
     base64 (0.3.0)
+    bigdecimal (3.3.1)
     connection_pool (2.5.4)
+    csv (3.3.5)
     debug (1.7.1)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -21,7 +23,8 @@ GEM
       multi_json (>= 1.9.2)
       webrick
     honeybadger (5.2.0)
-    httparty (0.21.0)
+    httparty (0.24.0)
+      csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
     io-console (0.6.0)
@@ -30,10 +33,11 @@ GEM
     json (2.6.3)
     language_server-protocol (3.17.0.3)
     logger (1.7.0)
-    mini_mime (1.1.2)
+    mini_mime (1.1.5)
     moneta (1.0.0)
     multi_json (1.15.0)
-    multi_xml (0.6.0)
+    multi_xml (0.7.1)
+      bigdecimal (~> 3.1)
     mustermann (3.0.4)
       ruby2_keywords (~> 0.0.1)
     parallel (1.22.1)
@@ -106,7 +110,7 @@ DEPENDENCIES
   dotenv
   faraday
   honeybadger (~> 5.2)
-  httparty (~> 0.21.0)
+  httparty (~> 0.24.0)
   json
   platform-api
   rake
