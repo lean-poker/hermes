@@ -30,7 +30,9 @@ GEM
       moneta
       multi_json (>= 1.9.2)
       webrick
-    honeybadger (5.2.0)
+    honeybadger (6.5.4)
+      logger
+      ostruct
     httparty (0.24.2)
       csv
       mini_mime (>= 1.0.0)
@@ -54,6 +56,7 @@ GEM
       ruby2_keywords (~> 0.0.1)
     net-http (0.9.1)
       uri (>= 0.11.1)
+    ostruct (0.6.3)
     parallel (1.28.0)
     parser (3.3.11.1)
       ast (~> 2.4.1)
@@ -151,7 +154,7 @@ DEPENDENCIES
   debug (~> 1.11)
   dotenv
   faraday
-  honeybadger (~> 5.2)
+  honeybadger (~> 6.5)
   httparty (~> 0.24.2)
   json
   platform-api
