@@ -27,7 +27,7 @@ GEM
       multi_json (>= 1.9.2)
       webrick
     honeybadger (5.2.0)
-    httparty (0.24.0)
+    httparty (0.24.2)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -133,7 +133,7 @@ DEPENDENCIES
   dotenv
   faraday
   honeybadger (~> 5.2)
-  httparty (~> 0.24.0)
+  httparty (~> 0.24.2)
   json
   platform-api
   rake
