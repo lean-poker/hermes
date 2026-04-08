@@ -32,7 +32,7 @@ GEM
     io-console (0.6.0)
     irb (1.6.3)
       reline (>= 0.3.0)
-    json (2.6.3)
+    json (2.19.3)
     language_server-protocol (3.17.0.3)
     logger (1.7.0)
     mini_mime (1.1.5)
