@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.1.3"
 
-gem "debug", "~> 1.7"
+gem "debug", "~> 1.11"
 gem "dotenv"
 gem "honeybadger", "~> 5.2"
 gem "json"
