@@ -30,7 +30,7 @@ GEM
       moneta
       multi_json (>= 1.9.2)
       webrick
-    honeybadger (6.5.6)
+    honeybadger (6.6.0)
       logger
       ostruct
     httparty (0.24.2)
@@ -154,7 +154,7 @@ DEPENDENCIES
   debug (~> 1.11)
   dotenv
   faraday
-  honeybadger (~> 6.5)
+  honeybadger (~> 6.6)
   httparty (~> 0.24.2)
   json
   platform-api
