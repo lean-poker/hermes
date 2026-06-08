@@ -14,8 +14,7 @@ GEM
     dotenv (3.2.0)
     erb (4.0.4.1)
       cgi (>= 0.3.3)
-    erubis (2.7.0)
-    excon (1.4.2)
+    excon (1.5.0)
       logger
     faraday (2.14.2)
       faraday-net_http (>= 2.0, < 3.5)
@@ -23,14 +22,13 @@ GEM
       logger
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
-    heroics (0.1.3)
+    heroics (0.1.4)
       base64
-      erubis (~> 2.0)
       excon
+      json
       moneta
-      multi_json (>= 1.9.2)
       webrick
-    honeybadger (6.6.2)
+    honeybadger (6.7.0)
       logger
       ostruct
     httparty (0.24.2)
@@ -43,13 +41,12 @@ GEM
       prism (>= 1.3.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.19.7)
+    json (2.19.8)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
     mini_mime (1.1.5)
     moneta (1.0.0)
-    multi_json (1.19.1)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
     mustermann (3.0.4)
@@ -61,7 +58,7 @@ GEM
     parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
-    platform-api (3.9.0)
+    platform-api (3.9.1)
       heroics (~> 0.1.1)
       moneta (~> 1.0.0)
       rate_throttle_client (~> 0.1.0)
@@ -154,7 +151,7 @@ DEPENDENCIES
   debug (~> 1.11)
   dotenv
   faraday
-  honeybadger (~> 6.6)
+  honeybadger (~> 6.7)
   httparty (~> 0.24.2)
   json
   platform-api
