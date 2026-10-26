@@ -4,7 +4,7 @@ ruby "3.1.3"
 
 gem "debug", "~> 1.11"
 gem "dotenv"
-gem "honeybadger", "~> 6.9"
+gem "honeybadger", "~> 6.10"
 gem "json"
 gem "platform-api"
 gem "rake"
